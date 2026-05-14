@@ -1,4 +1,4 @@
-package com.example.acanomusicapp.data
+package com.example.acanomusicapp.models
 
 import kotlinx.serialization.Serializable
 

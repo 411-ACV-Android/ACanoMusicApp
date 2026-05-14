@@ -1,5 +1,6 @@
-package com.example.acanomusicapp.data
+package com.example.acanomusicapp.services
 
+import com.example.acanomusicapp.models.Album
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
