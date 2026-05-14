@@ -12,12 +12,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.example.acanomusicapp.DetailRoute // Asegúrate de que esta importación esté
 import com.example.acanomusicapp.components.*
 import com.example.acanomusicapp.models.NetworkResponse
 import com.example.acanomusicapp.services.RetrofitClient
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     var uiState by remember { mutableStateOf<NetworkResponse>(NetworkResponse.Loading) }
 
     LaunchedEffect(Unit) {
@@ -33,7 +35,6 @@ fun HomeScreen() {
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {
-
             item { Header() }
 
             item {
@@ -46,7 +47,17 @@ fun HomeScreen() {
                         horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         items((uiState as NetworkResponse.Success).data) { album ->
-                            AlbumCard(album = album) { /* Click para navegación */ }
+                            AlbumCard(album = album) {
+                                navController.navigate(
+                                    DetailRoute(
+                                        id = album.id,
+                                        title = album.title,
+                                        artist = album.artist,
+                                        image = album.image,
+                                        description = album.description
+                                    )
+                                )
+                            }
                         }
                     }
                 }
@@ -59,7 +70,17 @@ fun HomeScreen() {
 
             if (uiState is NetworkResponse.Success) {
                 items((uiState as NetworkResponse.Success).data) { album ->
-                    RecentlyPlayedCard(album = album) { /* Click para navegación */ }
+                    RecentlyPlayedCard(album = album) {
+                        navController.navigate(
+                            DetailRoute(
+                                id = album.id,
+                                title = album.title,
+                                artist = album.artist,
+                                image = album.image,
+                                description = album.description
+                            )
+                        )
+                    }
                 }
             }
 
