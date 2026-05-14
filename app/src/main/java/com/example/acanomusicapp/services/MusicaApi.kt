@@ -9,7 +9,7 @@ interface MusicApiService {
     @GET("api/albums")
     suspend fun getAlbums(): List<Album>
     @GET("api/albums/{id}")
-    suspend fun getAlbumDetail(@Path("id") id: Int): Album
+    suspend fun getAlbumDetail(@Path("id") id: String): Album
 }
 object RetrofitClient {
     private const val BASE_URL = "https://musicapi.pjasoft.com/"
